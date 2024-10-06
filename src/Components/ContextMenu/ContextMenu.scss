@@ -1,0 +1,9 @@
+:root{
+    --contexify-activeItem-bgColor: transparent
+}
+
+.contexify__item:not(.contexify__item--disabled):hover > .contexify__item__content,
+.contexify__item:not(.contexify__item--disabled):focus > .contexify__item__content {
+    border: none !important;
+    background-color: transparent;
+}
