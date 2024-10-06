@@ -3,9 +3,12 @@ import { useContextMenu } from "react-contexify";
 import ContextMenu from "../../ContextMenu/ContextMenu.jsx";
 
 const MENU_ID = "menu-id";
+const KEY = 'name'
 
 const ContactList = () => {
-    const { color } = useStore()
+    const {colors} = useStore()
+    const color = colors.filter((c) => c.key == 'name')[0]?.value
+    console.log(`current color is ${JSON.stringify(color)}`)
 
     const { show } = useContextMenu({
         id: MENU_ID
@@ -26,7 +29,7 @@ const ContactList = () => {
             >
                 contacts
             </div>
-            <ContextMenu />
+            <ContextMenu colorKey={KEY} />
         </>
     )
 }

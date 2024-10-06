@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import useStore from "../../../store.jsx"
-import { ChromePicker } from 'react-color';
+import { PhotoshopPicker } from 'react-color';
 import { Menu, Item, useContextMenu } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
 import './ContextMenu.css';
@@ -9,10 +9,10 @@ import './ContextMenu.css';
 
 
 
-const ContextMenu = () => {
+const ContextMenu = ({colorKey}) => {
     const MENU_ID = "menu-id";
-    const setColor = useStore((state) => state.setColor)
-    const initialColor = useStore((state) => state.color)
+    const {colors, setColor} = useStore()
+    const initialColor = colors.filter((c) => c.key == colorKey)[0]?.value
     const [newColor, setNewColor] = useState('#000')
 
     const { show } = useContextMenu({
@@ -28,13 +28,13 @@ const ContextMenu = () => {
     }, [initialColor])
 
     const handleChangeComplete = (color) => {
-        setColor(color.hex)
+        setColor(colorKey, color.hex)
     }
 
     return (
         <Menu id={MENU_ID} >
             <Item closeOnClick={false} onClick={handleItemClick} >
-                <ChromePicker
+                <PhotoshopPicker
                     color={initialColor}
                     onChangeComplete={handleChangeComplete}
                 />
